@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  php-apache:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - ldap-server
+
+  ldap-server:
+    image: osixia/openldap:latest
+    environment:
+      - LDAP_ORGANISATION=MyOrg
+      - LDAP_DOMAIN=myorg.local
+      - LDAP_ADMIN_PASSWORD=admin_password
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - ./ldap-data:/var/lib/ldap
+    networks:
+      - ldap-network
+
+networks:
+  ldap-network:
+
