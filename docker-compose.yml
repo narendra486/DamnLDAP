@@ -17,7 +17,6 @@ services:
       - LDAP_ADMIN_PASSWORD=admin_password
     ports:
       - "389:389"
-      - "636:636"
     volumes:
       - ./ldap-data:/var/lib/ldap
     networks:
